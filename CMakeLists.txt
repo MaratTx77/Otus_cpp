@@ -5,7 +5,6 @@ enable_testing()
 set(PATCH_VERSION "2" CACHE INTERNAL "Patch version")
 set(PROJECT_VERSION 0.0.${PATCH_VERSION})
 
-
 project(learn_cpp_otus VERSION ${PROJECT_VERSION})
 include_directories(${PROJECT_BINARY_DIR})
 
@@ -13,7 +12,6 @@ find_package(Boost COMPONENTS system REQUIRED)
 if(Boost_FOUND)
     message(STATUS "Found boost ${Boost_VERSION_STRING}")
 endif()
-
 
 # CMake dynamically generated file stored in main directory
 configure_file(version.h.in version.h)
