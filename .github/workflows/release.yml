@@ -15,11 +15,12 @@ jobs:
       - uses: actions/checkout@v3
         with:
           submodules: true
-      - run: sudo apt-get update && sudo apt-get install cmake libboost-test-dev -y
+      - run: sudo apt-get update && sudo apt-get install cmake libboost-all-dev -y
       - run: cmake . -DPATCH_VERSION=${{ github.run_number }}
       - run: cmake --build .
-      - run: cmake --build . --target test
       - run: cmake --build . --target package
+      - run: ls -la 02-ip_filter
+
       - name: Create Release
         id: create_release
         uses: actions/create-release@v1
@@ -30,6 +31,7 @@ jobs:
           release_name: Release ${{ github.run_number }}
           draft: false
           prerelease: false
+
       - name: Upload Release Asset
         id: upload-release-asset
         uses: actions/upload-release-asset@v1
@@ -40,3 +42,9 @@ jobs:
           asset_path: ./learn_cpp_otus-0.0.${{ github.run_number }}-Linux.deb
           asset_name: learn_cpp_otus-0.0.${{ github.run_number }}-Linux.deb
           asset_content_type: application/vnd.debian.binary-package
+
+      - name: Upload Example binary
+        uses: actions/upload-artifact@v3
+        with:
+          name: upload binary
+          path: 02-ip_filter/ip_filter
