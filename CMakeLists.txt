@@ -8,15 +8,10 @@ set(PROJECT_VERSION 0.0.${PATCH_VERSION})
 project(learn_cpp_otus VERSION ${PROJECT_VERSION})
 include_directories(${PROJECT_BINARY_DIR})
 
-# CMake dynamically generated file stored in main directory
-configure_file(version.h.in version.h)
-add_library(common_lib lib.cpp)
-target_compile_options(common_lib PRIVATE -Wall -Wextra -pedantic -Werror)
-
 # Plan to use google test for all lessons
 add_subdirectory(googletest)
 
 # Each separate lesson will be created with own CMake configuration inside XX-lesson_name subdirectory
-add_subdirectory(01-helloworld)
+add_subdirectory(04-print_ip)
 
-set(CMAKE_CXX_STANDARD 14)
+set(CMAKE_CXX_STANDARD 20)
