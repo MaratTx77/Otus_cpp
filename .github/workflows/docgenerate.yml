@@ -16,7 +16,7 @@ jobs:
         with:
           submodules: "true"
       - run: sudo apt-get install doxygen graphviz -y
-      - run: doxygen Doxyfile
+      - run: doxygen 04-print_ip/Doxyfile
       - uses: JamesIves/github-pages-deploy-action@v4.4.3
         with:
           branch: "homework_04_doc"

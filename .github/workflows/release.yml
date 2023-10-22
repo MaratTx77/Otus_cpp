@@ -3,7 +3,7 @@ name: 'C++ CI'
 on:
   push:
     branches:
-      - homework_02
+      - homework_04
       - feature/github_actions
   workflow_dispatch:
 
