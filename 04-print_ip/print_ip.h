@@ -1,3 +1,6 @@
+/**
+ * @file
+ * print_ip.h */
 
 #ifndef PRINT_IP_H
 #define PRINT_IP_H
@@ -8,7 +11,7 @@
 #include <tuple>
 #include <ranges>
 #include <concepts>
-/** @file */
+
 template <typename T> requires(std::integral<T>) // Печать побайтно целых
 std::string to_string(T t) {
     std::vector<std::string> addr = {};
