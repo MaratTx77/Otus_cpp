@@ -1,3 +1,4 @@
+
 #ifndef PRINT_IP_H
 #define PRINT_IP_H
 
@@ -7,7 +8,7 @@
 #include <tuple>
 #include <ranges>
 #include <concepts>
-
+/** @file */
 template <typename T> requires(std::integral<T>) // Печать побайтно целых
 std::string to_string(T t) {
     std::vector<std::string> addr = {};
@@ -31,9 +32,17 @@ std::string to_string(T t) {
     return std::string{t};
 }
 
+/**
+ * @brief Check T is std::vector
+ * @tparam T template parameter
+ */
 template<typename T>
 concept is_vector = std::same_as<std::decay_t<T>, std::vector<typename std::decay_t<T>::value_type> >;
 
+/**
+ * @brief Check T is std::list
+ * @tparam T template parameter
+ */
 template<typename T>
 concept is_list = std::same_as<std::decay_t<T>, std::list<typename std::decay_t<T>::value_type> >;
 
@@ -93,6 +102,10 @@ std::string tuple_print(const std::tuple<T...>& t) {
     return result;
 }
 
+/**
+ * @brief Check T is std::tuple with one type elements
+ * @tparam T template parameter
+ */
 template<typename T>
 concept is_tup = is_tuple_of_same_types<T>::value;
 
@@ -104,13 +117,16 @@ std::string to_string(T t) requires is_tup<T> {  // Печать std::tuple c э
     return std::string{""};
 }
 
-/// \brief Print ip to std::cout
-/// \tparam T template parameter, should be integer type or std::string/vector/list/tuple from the same type elements
-/// \param t value with ip
-/// **Example using**
-/// \code
-/// print_ip( std::make_tuple(123, 456, 789, 0, 222));
-/// \endcode
+
+/**
+ * @brief Print ip to std::cout
+ * @tparam T template parameter, should be integer type or std::string/vector/list/tuple from the same type elements
+ * @param t printing value
+ * **Example using**
+ * @code
+ * print_ip( std::make_tuple(123, 456, 789, 0, 222));
+ * @endcode
+ */
 template<typename T>
 void print_ip(T t) {  // Обернул вызов to_string - чтобы делать модульное тестирование над ним
     std::cout << to_string(t) << "\n";
