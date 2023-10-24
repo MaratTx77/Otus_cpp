@@ -1,7 +1,3 @@
-/**
- * @file
- * print_ip.h */
-
 #ifndef PRINT_IP_H
 #define PRINT_IP_H
 
@@ -12,6 +8,11 @@
 #include <ranges>
 #include <concepts>
 
+/**
+ * @brief Stringify ip for integer parameter
+ * @tparam T template parameter
+ * @param t printing value
+ */
 template <typename T> requires(std::integral<T>) // Печать побайтно целых
 std::string to_string(T t) {
     std::vector<std::string> addr = {};
@@ -30,6 +31,11 @@ std::string to_string(T t) {
     return result;
 }
 
+/**
+ * @brief Stringify ip for std::string parameter
+ * @tparam T template parameter
+ * @param t printing value
+ */
 template <typename T> requires(std::is_convertible_v<T, std::string_view>) // Печать строкоподобных
 std::string to_string(T t) {
     return std::string{t};
@@ -112,6 +118,11 @@ std::string tuple_print(const std::tuple<T...>& t) {
 template<typename T>
 concept is_tup = is_tuple_of_same_types<T>::value;
 
+/**
+ * @brief Stringify ip for std::tuple consist from the same types elements
+ * @tparam T template parameter
+ * @param t printing value
+ */
 template<typename T>
 std::string to_string(T t) requires is_tup<T> {  // Печать std::tuple c элементами одного типа
     if constexpr (std::tuple_size_v<T> != 0) { // компиляция не должна падать при пустом std::tuple
@@ -119,7 +130,6 @@ std::string to_string(T t) requires is_tup<T> {  // Печать std::tuple c э
     }
     return std::string{""};
 }
-
 
 /**
  * @brief Print ip to std::cout
